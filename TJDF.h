@@ -43,6 +43,12 @@ const char* processoMaisAntigo(const Processo* lista, int qtd);
 int contarViolenciaDomestica(const Processo* lista, int qtd);
 int contarFeminicidio(const Processo* lista, int qtd);
 int contarAmbiental(const Processo* lista, int qtd);
+int contarQuilombolas (const Processo* lista, int qtd);
+int contarIndigenas (const Processo* lista, int qtd);
+int contarInfanciaeJuventude (const Processo* lista, int qtd);
+int compararData(const char* d1, const char* d2);
+int diferencaDeDias(const Processo* lista,int qtd, const char* id_processo);
+
 
 
 #endif

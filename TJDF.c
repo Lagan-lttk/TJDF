@@ -29,8 +29,8 @@ Processo* carregarProcessos(const char* arquivo, int* qtd) {
     while (fgets(linha, TAM_LINHA, fp)) {
         if (contador >= N) break;
 
-        // Remove \n ou \r\n
-        linha[strcspn(linha, "\r\n")] = 0;
+        // Remove \n
+        linha[strcspn(linha, "\n")] = 0;
 
         Processo *p = &lista[contador];
 
@@ -101,70 +101,139 @@ Processo* carregarProcessos(const char* arquivo, int* qtd) {
     return lista;
 }
 
+const char* buscarUltimoOJ(const Processo* lista, int qtd, const char* id_processo){
 
-
-
-
-  /*
-Processo * carregarProcessos(char * arquivo, int * qtd) {
-
-    Processo p;
-    int contador;
-
-    FILE * fp = fopen("./TJDFT_amostra.csv", "r");
-
-    if (fp == NULL) {
-        printf("Arquivo inexistente!");
-        return 1;
-    }   
-    
-    char Cabecalho[TAM_LINHA];
-    fscanf(fp, "%s", Cabecalho); //Desconsiderar o cabeçalho
-    while (fscanf(fp,
-        "%63[^;];%63[^;];%7[^;];%127[^;];%7[^;];%15[^;];%d;"
-        "%d;%63[^;];%19[^;];%63[^;];%d;%d;%d;%d;%d;%d;"
-        "%127[^;];%19[^;];%d;%d;%d;%d;%d;%d;%d;%d",
-        p.id_processo,
-        p.numero_sigilo,
-        p.sigla_grau,
-        p.procedimento,
-        p.ramo_justica,
-        p.sigla_tribunal,
-        &p.id_tribunal,
-        &p.recurso,
-        p.id_ultimo_oj,
-        p.dt_recebimento,
-        p.id_ultima_classe,
-        &p.flag_violencia_domestica,
-        &p.flag_feminicidio,
-        &p.flag_ambiental,
-        &p.flag_quilombolas,
-        &p.flag_indigenas,
-        &p.flag_infancia,
-        p.decisao,
-        p.dt_resolvido,
-        &p.cnm1,
-        &p.primeirasentm1,
-        &p.baixm1,
-        &p.decm1,
-        &p.mpum1,
-        &p.julgadom1,
-        &p.desm1,
-        &p.susm1
-    ) == 26) {
-        printf("ID=%s | Sigilo=%s | Grau=%s | Procedimento=%s\n",
-               p.id_processo, p.numero_sigilo, p.sigla_grau, p.procedimento);
+    for (int i = 0; i < qtd; i++) { 
+        //ID Ultimo OJ - amostra[8];
+        if (strcmp(lista[i].id_processo, id_processo) == 0)
+        {
+            return lista[i].id_ultimo_oj;
+        }   
     }
-    
-   
-  
 
-     
-    
-    
-
-    fclose(fp);
-    return 0;   
+    return NULL;
 }
-*/
 
+int compararDatas(const char* d1, const char* d2) {
+    return strcmp(d1, d2);
+}
+
+const char* processoMaisAntigo(const Processo* lista, int qtd) {
+
+    int maisAntigo = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if(compararDatas(lista[i].dt_recebimento, lista[maisAntigo].dt_recebimento) < 0) {
+          maisAntigo = i;  
+        }
+    }
+
+    return lista[maisAntigo].dt_recebimento;
+}
+
+int contarViolenciaDomestica(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_violencia_domestica == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int contarFeminicidio(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_feminicidio == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int contarAmbiental(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_ambiental == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int contarQuilombolas(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_quilombolas == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int contarIndigenas(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_indigenas == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int contarInfanciaeJuventude(const Processo* lista, int qtd){
+
+    int contador = 0;
+
+    for (int i = 0; i < qtd; i++)
+    {
+        if (lista[i].flag_infancia == 1)
+        {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+int diferencaDeDias(const Processo* lista,int qtd, const char* id_processo){
+    
+    int gap;
+
+    for (int i = 0; i < qtd; i++) { 
+        //ID Ultimo OJ - amostra[8];
+        if (strcmp(lista[i].id_processo, id_processo) == 0)
+        {
+            return gap = lista[i].dt_resolvido - lista[i].dt_recebimento;
+        }   
+    }
+
+    return NULL;
+    
+}
