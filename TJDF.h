@@ -48,7 +48,8 @@ int contarIndigenas (const Processo* lista, int qtd);
 int contarInfanciaeJuventude (const Processo* lista, int qtd);
 int compararData(const char* d1, const char* d2);
 int diferencaDeDias(const Processo* lista,int qtd, const char* id_processo);
-
-
+int DataParaDias (int Ano, int Mes, int dia );
+float cumprimentoMeta (Processo* lista, int qtd);
+void processosJulgados(Processo *lista, int qtd, const char *arquivo);
 
 #endif
