@@ -39,7 +39,7 @@ int main() {
     //Tabela com os valores filtrados.
 
     printf("========== Filtro TJDF ==========\n");
-    printf("- "); contarProcessos(processos, qtd);
+    contarProcessos(processos, qtd);
     printf("- Ultimo Orgao Julgador a partir do ID - 323961063: %d;\n", ultimoOJ);
     printf("- Data do Processo mais antigo: %s;\n", maisAntigo);
     printf("- Diferenca de Recebimento para Cumprimento do ID - 323961063: %d dias;\n", diferenca);
@@ -60,7 +60,7 @@ int main() {
     printf("- Comunidades quilombolas: %d\n", contadorQuilombola);
     
     const int contadorIndigena = contarIndigenas(processos,qtd);
-    printf("- povos indigenas: %d\n", contadorIndigena);
+    printf("- Povos indigenas: %d\n", contadorIndigena);
     
     const int contadorInfanciaeJuventude = contarInfanciaeJuventude(processos,qtd);
     printf("- ECA: %d\n", contadorInfanciaeJuventude);

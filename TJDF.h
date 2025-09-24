@@ -4,6 +4,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+//Estrutura de dados do arquivo CSV
 typedef struct {
 
     char id_processo[64];
@@ -36,20 +37,32 @@ typedef struct {
 
 } Processo;
 
+//Funções para o arquivo CSV
+
+//Carregar o arquivo
 Processo* carregarProcessos(const char* arquivo, int* qtd);
 int contarProcessos(const Processo* lista, int qtd);
+
+//Funções relacionadas a atributos especificos
 const char* buscarUltimoOJ(const Processo* lista, int qtd, const char* id_processo);
 const char* processoMaisAntigo(const Processo* lista, int qtd);
+
+//Flags
 int contarViolenciaDomestica(const Processo* lista, int qtd);
 int contarFeminicidio(const Processo* lista, int qtd);
 int contarAmbiental(const Processo* lista, int qtd);
 int contarQuilombolas (const Processo* lista, int qtd);
 int contarIndigenas (const Processo* lista, int qtd);
 int contarInfanciaeJuventude (const Processo* lista, int qtd);
+
+//Datas
 int compararData(const char* d1, const char* d2);
-int diferencaDeDias(const Processo* lista,int qtd, const char* id_processo);
-int DataParaDias (int Ano, int Mes, int dia );
+int diferencaDeDias(const Processo* lista, int qtd, const char* id_processo);
+int DataParaDias (int Ano, int Mes, int dia);
+
+//Funções relacionadas a Meta01 dos processos
 float cumprimentoMeta (Processo* lista, int qtd);
 void processosJulgados(Processo *lista, int qtd, const char *arquivo);
+
 
 #endif
