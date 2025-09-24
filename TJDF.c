@@ -276,7 +276,8 @@ int diferencaDeDias(const Processo* lista, int qtd, const char* id_processo) {
 float cumprimentoMeta (Processo* lista, int qtd) {
     if (!lista || qtd <= 0) return 0.0f; //retorna 0 caso o arquivo não exista ou não tenha conteudo
 
-    const int anoReferencia = 2025; // ano de referencia para a meta
+    //Filtro para o ano
+    //const int anoReferencia = 2025; // ano de referencia para a meta
 
     long cnm1 = 0;
     long julgadom1 = 0;
@@ -284,7 +285,6 @@ float cumprimentoMeta (Processo* lista, int qtd) {
     long susm1 = 0;
 
     for (int i = 0; i < qtd; i++) {
-        if (lista[i].dt_recebimento[0] == '\0') continue; // pula vazios
 
         //Filtro para o ano de 2025!!!!
         /*int ano = -1, mes = -1, dia = -1;//Iniciadas com -1 para a verificação do sscanf
